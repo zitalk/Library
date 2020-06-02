@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<td>${book.price}</td>
 					<td>${book.bookCase.name}</td>
 					<td>
-						<a href="#">借阅</a>
+						<a href="/book?method=addBorrow&bookid=${book.id}">借阅</a>
 					</td>
 				</tr>
 			</c:forEach>

@@ -48,14 +48,14 @@ public class LoginServlet extends HttpServlet {
             switch (type) {
                 case "reader":
                     Reader reader = (Reader) object;
-                    //跳转到读者界面
-                    session.setAttribute("reader", object);
-                    List<Book> list = bookService.findAll(1);
-                    req.setAttribute("list",list);
-                    req.setAttribute("dataPrePage",6);//每页多少条数据
-                    req.setAttribute("currentPage",1);//当前页数
-                    req.setAttribute("pages",bookService.getPages());//总页数
-                    req.getRequestDispatcher("index.jsp").forward(req,resp);
+                    session.setAttribute("reader", object);//跳转到读者界面,将reader对象放进session
+                    resp.sendRedirect("/book?page=1");//直接重定向到BookServlet，解耦合
+//                    List<Book> list = bookService.findAll(1);
+//                    req.setAttribute("list",list);
+//                    req.setAttribute("dataPrePage",6);//每页多少条数据
+//                    req.setAttribute("currentPage",1);//当前页数
+//                    req.setAttribute("pages",bookService.getPages());//总页数
+//                    req.getRequestDispatcher("index.jsp").forward(req,resp);
 
                     break;
                 case "admin":
