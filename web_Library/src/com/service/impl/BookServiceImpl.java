@@ -1,6 +1,7 @@
 package com.service.impl;
 
 import com.entity.Book;
+import com.entity.Borrow;
 import com.repository.BookRepository;
 import com.repository.BorrowRepository;
 import com.repository.impl.BookRepositoryImpl;
@@ -49,5 +50,11 @@ public class BookServiceImpl implements BookService {
         Date date2 = calendar.getTime();//拿到14天之后的日期
         String returnTime = simpleDateFormat.format(date2);
         borrowRepository.insert(bookid, readerid, borrowTime,returnTime,null,0);//此处体现出包装类Integer的好处，可以接受null
+    }
+
+    @Override
+    public List<Borrow> findAllBorrowByReaderId(Integer id) {
+
+        return borrowRepository.findAllByReaderId(id);
     }
 }

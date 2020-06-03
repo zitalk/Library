@@ -9,7 +9,7 @@ public class Reader {
     private String password;
     private String name;
     private String tel;
-    private String cardid;
+    private String cardId;
     private String gender;
 
     public Integer getId() {
@@ -52,12 +52,12 @@ public class Reader {
         this.tel = tel;
     }
 
-    public String getCardid() {
-        return cardid;
+    public String getCardId() {
+        return cardId;
     }
 
-    public void setCardid(String cardid) {
-        this.cardid = cardid;
+    public void setCardId(String cardId) {
+        this.cardId = cardId;
     }
 
     public String getGender() {
@@ -68,13 +68,19 @@ public class Reader {
         this.gender = gender;
     }
 
-    public Reader(Integer id, String username, String password, String name, String tel, String cardid, String gender) {
+    public Reader(Integer id, String username, String password, String name, String tel, String cardId, String gender) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.name = name;
         this.tel = tel;
-        this.cardid = cardid;
+        this.cardId = cardId;
         this.gender = gender;
+    }
+
+    public Reader(String name, String tel, String cardId) {
+        this.name = name;
+        this.tel = tel;
+        this.cardId = cardId;
     }
 }

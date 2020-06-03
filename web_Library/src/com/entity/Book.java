@@ -10,15 +10,7 @@ public class Book {
     private BookCase bookCase;//属性也是Book的属性，从关系型数据库的外键到面向对象的体现
     //abled不体现，不属于业务字段
 
-    public Book(Integer id, String name, String author, String publish, Integer pages, Double price, BookCase bookCase) {
-        this.id = id;
-        this.name = name;
-        this.author = author;
-        this.publish = publish;
-        this.pages = pages;
-        this.price = price;
-        this.bookCase = bookCase;
-    }
+
 
     public Integer getId() {
         return id;
@@ -74,5 +66,21 @@ public class Book {
 
     public void setBookCase(BookCase bookCase) {
         this.bookCase = bookCase;
+    }
+
+    public Book(Integer id, String name, String author, String publish, Integer pages, Double price, BookCase bookCase) {
+        this.id = id;
+        this.name = name;
+        this.author = author;
+        this.publish = publish;
+        this.pages = pages;
+        this.price = price;
+        this.bookCase = bookCase;
+    }
+
+    public Book(String name, String author, String publish) {
+        this.name = name;
+        this.author = author;
+        this.publish = publish;
     }
 }

@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.entity.Book;
+import com.entity.Borrow;
 import com.entity.Reader;
 import com.service.BookService;
 import com.service.impl.BookServiceImpl;
@@ -52,7 +53,12 @@ public class BookServlet extends HttpServlet {
                 Integer bookid = Integer.parseInt(bookidStr);//转型
                 HttpSession session = req.getSession();
                 Reader reader = (Reader) session.getAttribute("reader");
+                //添加借书请求
                 bookService.addBorrow(bookid,reader.getId());
+                //展示当前用户的所有借书记录
+                List<Borrow> borrowList = bookService.findAllBorrowByReaderId(reader.getId());
+                req.setAttribute("list",borrowList);
+                req.getRequestDispatcher("borrow.jsp").forward(req,resp);
                 break;
         }
 
