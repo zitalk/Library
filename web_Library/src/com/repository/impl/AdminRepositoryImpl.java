@@ -18,23 +18,19 @@ public class AdminRepositoryImpl implements AdminRepository {
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         Admin admin = null;
-
         try {
             statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, password);
+            statement.setString(1,username);
+            statement.setString(2,password);
             resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                admin = new Admin(resultSet.getInt(1), resultSet.getString(2), resultSet.getString(3));
+            if(resultSet.next()){
+                admin = new Admin(resultSet.getInt(1),resultSet.getString(2),resultSet.getString(3));
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         } finally {
-            JDBCTools.release(connection, statement, resultSet);
-
+            JDBCTools.release(connection,statement,resultSet);
         }
-
         return admin;
-
     }
 }

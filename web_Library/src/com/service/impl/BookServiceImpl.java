@@ -15,12 +15,12 @@ import java.util.List;
 
 public class BookServiceImpl implements BookService {
 
-    private BookRepository bookRepository =new BookRepositoryImpl();
+    private BookRepository bookRepository = new BookRepositoryImpl();
     private BorrowRepository borrowRepository = new BorrowRepositoryImpl();
-    private final int LIMIT = 6; //每页展示10行
+    private final int LIMIT = 6;//每页展示10行
+
     @Override
     public List<Book> findAll(int page) {
-
         int index = (page-1)*LIMIT;
         return bookRepository.findAll(index,LIMIT);
     }
@@ -29,9 +29,21 @@ public class BookServiceImpl implements BookService {
     public int getPages() {
         int count = bookRepository.count();
         int page = 0;
-        if (count % LIMIT==0){
+        if(count % LIMIT == 0){
             page = count/LIMIT;
-        }else {
+        }else{
+            page = count/LIMIT+1;
+        }
+        return page;
+    }
+
+    @Override
+    public int getBorrowPages(Integer readerid) {
+        int count = borrowRepository.count(readerid);
+        int page = 0;
+        if(count % LIMIT == 0){
+            page = count/LIMIT;
+        }else{
             page = count/LIMIT+1;
         }
         return page;
@@ -39,7 +51,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBorrow(Integer bookid, Integer readerid) {
-        ///借书时间
+        //借书时间
         Date date = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String borrowTime = simpleDateFormat.format(date);
@@ -49,12 +61,37 @@ public class BookServiceImpl implements BookService {
         calendar.set(Calendar.DAY_OF_YEAR, dates);//对日期进行转换
         Date date2 = calendar.getTime();//拿到14天之后的日期
         String returnTime = simpleDateFormat.format(date2);
-        borrowRepository.insert(bookid, readerid, borrowTime,returnTime,null,0);//此处体现出包装类Integer的好处，可以接受null
+        borrowRepository.insert(bookid,readerid,borrowTime,returnTime,null,0);//此处体现出包装类Integer的好处，可以接受null
     }
 
     @Override
-    public List<Borrow> findAllBorrowByReaderId(Integer id) {
-
-        return borrowRepository.findAllByReaderId(id);
+    public List<Borrow> findAllBorrowByReaderId(Integer id,Integer page) {
+        //业务：将 page 换算成 index,limit
+        int index = (page-1)*LIMIT;
+        return borrowRepository.findAllByReaderId(id,index,LIMIT);
     }
+
+    @Override
+    public List<Borrow> findAllBorrowByState(Integer state,Integer page) {
+        int index = (page-1)*LIMIT;
+        return borrowRepository.findAllByState(state,index,LIMIT);
+    }
+
+    @Override
+    public int getBorrowPagesByState(Integer state) {
+        int count = borrowRepository.countByState(state);
+        int page = 0;
+        if(count % LIMIT == 0){
+            page = count/LIMIT;
+        }else{
+            page = count/LIMIT+1;
+        }
+        return page;
+    }
+
+    @Override
+    public void handleBorrow(Integer borrowId, Integer state, Integer adminId) {
+        borrowRepository.handle(borrowId,state,adminId);
+    }
+
 }
