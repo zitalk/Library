@@ -68,6 +68,17 @@ public class Reader {
         this.gender = gender;
     }
 
+    /**
+     * 读者对象完整的有参构造
+     *
+     * @param id
+     * @param username
+     * @param password
+     * @param name
+     * @param tel
+     * @param cardId
+     * @param gender
+     */
     public Reader(Integer id, String username, String password, String name, String tel, String cardId, String gender) {
         this.id = id;
         this.username = username;
@@ -78,6 +89,13 @@ public class Reader {
         this.gender = gender;
     }
 
+    /**
+     * 给借阅时生成读者对象用，因为用不到实际读者的所有属性，只需要下面几个即可
+     *
+     * @param name
+     * @param tel
+     * @param cardId
+     */
     public Reader(String name, String tel, String cardId) {
         this.name = name;
         this.tel = tel;

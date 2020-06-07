@@ -5,7 +5,6 @@ import com.entity.Borrow;
 import com.entity.Reader;
 import com.repository.BorrowRepository;
 import com.utils.JDBCTools;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,6 +13,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BorrowRepositoryImpl implements BorrowRepository {
+    /**
+     * 插入一条借阅记录，读者用
+     * @param bookid
+     * @param readerid
+     * @param borrowtime
+     * @param returntime
+     * @param adminid
+     * @param state
+     */
     @Override
     public void insert(Integer bookid, Integer readerid, String borrowtime, String returntime, Integer adminid, Integer state) {
         Connection connection = JDBCTools.getConnection();
@@ -33,6 +41,13 @@ public class BorrowRepositoryImpl implements BorrowRepository {
         }
     }
 
+    /**
+     * 通过读者id查询到所有借阅记录，读者用
+     * @param id
+     * @param index
+     * @param limit
+     * @return
+     */
     @Override
     public List<Borrow> findAllByReaderId(Integer id,Integer index,Integer limit) {
         Connection connection = JDBCTools.getConnection();
@@ -77,6 +92,11 @@ public class BorrowRepositoryImpl implements BorrowRepository {
         return list;
     }
 
+    /**
+     * 借阅总数，计算出总页数，用于借阅页右下角展示用，读者用
+     * @param readerid
+     * @return
+     */
     @Override
     public int count(Integer readerid) {
         Connection connection = JDBCTools.getConnection();
@@ -99,6 +119,13 @@ public class BorrowRepositoryImpl implements BorrowRepository {
         return count;
     }
 
+    /**
+     * 通过state查询到所有借阅记录，管理员用
+     * @param state
+     * @param index
+     * @param limit
+     * @return
+     */
     @Override
     public List<Borrow> findAllByState(Integer state,Integer index,Integer limit) {
         Connection connection = JDBCTools.getConnection();
@@ -129,6 +156,11 @@ public class BorrowRepositoryImpl implements BorrowRepository {
         return list;
     }
 
+    /**
+     * 通过state查出所有借阅总数，计算出总页数，用于借阅页右下角展示用，管理员用
+     * @param state
+     * @return
+     */
     @Override
     public int countByState(Integer state) {
         Connection connection = JDBCTools.getConnection();
@@ -151,6 +183,12 @@ public class BorrowRepositoryImpl implements BorrowRepository {
         return count;
     }
 
+    /**
+     * 处理借阅请求，同意，拒绝，归还，管理员用
+     * @param borrowId
+     * @param state
+     * @param adminId
+     */
     @Override
     public void handle(Integer borrowId, Integer state, Integer adminId) {
         Connection connection = JDBCTools.getConnection();

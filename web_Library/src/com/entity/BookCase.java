@@ -2,6 +2,9 @@ package com.entity;
 
 import java.util.List;
 
+/**
+ * 图书类别的封装
+ */
 public class BookCase {
     private Integer id;
     private String name;

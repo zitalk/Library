@@ -61,7 +61,7 @@
 
 <div id="main">
 	<div class="navigation">
-		当前位置:&nbsp;&nbsp;<a href="book.do">首页</a>
+		当前位置:&nbsp;&nbsp;<a href="/book?page=1">首页</a>
 		<div id="readerBlock">欢迎回来&nbsp;:<a href="/book?method=findAllBorrow&page=1">${sessionScope.reader.name }</a>&nbsp;<a href="/logout">注销</a></div>
 	</div>
 	<div class="img_block">

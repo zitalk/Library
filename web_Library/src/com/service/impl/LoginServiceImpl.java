@@ -16,6 +16,13 @@ public class LoginServiceImpl implements LoginService {
     private ReaderRepository readerRepository = new ReaderRepositoryImpl();
     private AdminRepository adminRepository = new AdminRepositoryImpl();
 
+    /**
+     * 登录的封装，管理员，读者
+     * @param username
+     * @param password
+     * @param type
+     * @return
+     */
     @Override
     public Object login(String username, String password,String type) {
         Object object = null;//多态

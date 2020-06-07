@@ -1,5 +1,8 @@
 package com.entity;
 
+/**
+ * 封装图书对象的类
+ */
 public class Book {
     private Integer id;
     private String name;
@@ -8,8 +11,6 @@ public class Book {
     private Integer pages;
     private Double price;
     private BookCase bookCase;//属性也是Book的属性，从关系型数据库的外键到面向对象的体现
-    //abled不体现，不属于业务字段
-
 
 
     public Integer getId() {

@@ -1,5 +1,8 @@
 package com.entity;
 
+/**
+ * 将借阅也视为对象，体现oop思想
+ */
 public class Borrow {
     private Integer id;
     private Book book;
